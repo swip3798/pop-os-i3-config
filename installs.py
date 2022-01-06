@@ -57,7 +57,7 @@ def i3_gaps(install_next: bool = True):
     _("dpkg-buildpackage -us -uc")
     os.chdir("..")
     _("sudo dpkg -i i3_*{0}*deb i3-wm_*{0}*deb".format(timestamp))
-    _("rm -v *${igd_TIMESTAMP}*")
+    _("rm -v *{}*".format(timestamp))
         
 
 def dev_tools():
