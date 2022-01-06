@@ -201,7 +201,7 @@ bar {
 
 exec --no-startup-id nitrogen --restore
 
-#exec --no-startup-id compton --config /home/chris/.config/compton.conf -b
+exec --no-startup-id compton --config /home/chris/.config/compton.conf
 
 #exec --no-startup-id xrandr --output USB-C-0 --auto --left-of DP-4
 
