@@ -28,7 +28,7 @@ _("sudo apt update")
 _("sudo apt upgrade -y")
 
 # Base install
-_("sudo apt install -y i3 lxappearance nitrogen pulseaudio pavucontrol alsa-utils unzip arc-theme compton rofi neofetch arandr snapd curl ssh-askpass-fullscreen alacritty")
+_("sudo apt install -y i3 lxappearance nitrogen pulseaudio pavucontrol alsa-utils unzip arc-theme compton rofi neofetch arandr snapd curl ssh-askpass-fullscreen alacritty dockerd")
 
 if not args.no_restricted:
     _("sudo apt install -y ubuntu-restricted-extras")
