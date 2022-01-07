@@ -1,7 +1,8 @@
 import os
 import argparse
 
-from base import _
+from base import _, apt_install, apt_update, apt_upgrade
+from constants import BASIC_SOFTWARE, LIGHTDM_SOFTWARE
 import installs
 
 parser = argparse.ArgumentParser(description='Install i3 window manager and related software.')
@@ -24,20 +25,20 @@ args = parser.parse_args()
 _("sudo dpkg --add-architecture i386")
 
 # Update and Upgrade
-_("sudo apt update")
-_("sudo apt upgrade -y")
+apt_update()
+apt_upgrade()
 
 # Base install
-_("sudo apt install -y i3 lxappearance nitrogen pulseaudio pavucontrol alsa-utils unzip arc-theme compton rofi neofetch arandr snapd curl ssh-askpass-fullscreen alacritty docker.io")
+apt_install(BASIC_SOFTWARE)
 
 if not args.no_restricted:
-    _("sudo apt install -y ubuntu-restricted-extras")
+    apt_install(["ubuntu-restricted-extras"])
 else:
     logging.info("ubuntu-restricted-extras skipped")
 
 # Lightdm install
 if args.light_dm:
-    _("sudo apt install -y lightdm lightdm-settings slick-greeter")
+    apt_install(LIGHTDM_SOFTWARE)
 else:
     logging.info("No Lightdm installation")
 

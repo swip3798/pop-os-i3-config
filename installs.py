@@ -1,5 +1,5 @@
 import logging
-from base import _
+from base import _, apt_install
 import os
 import subprocess
 import re
@@ -14,7 +14,17 @@ I3_PATCHDIR="patches"
 def i3_gaps(install_next: bool = True):
     logging.info("Install dependencies")
     _("sudo apt -y build-dep i3-wm")
-    _("sudo apt -y install devscripts dpkg-dev dh-autoreconf libxcb-xrm-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev libxcb-shape0-dev meson")
+    apt_install([
+        "devscripts",
+        "dpkg-dev",
+        "dh-autoreconf",
+        "libxcb-xrm-dev",
+        "libxcb-xkb-dev", 
+        "libxkbcommon-dev", 
+        "libxkbcommon-x11-dev",
+        "libxcb-shape0-dev",
+        "meson",
+    ])
 
     logging.info("Clone repository")
     _("git clone {} {}".format(I3_GITURL, I3_GITDIR))
