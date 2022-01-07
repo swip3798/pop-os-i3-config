@@ -16,6 +16,8 @@ BASIC_SOFTWARE = [
     "ssh-askpass-fullscreen",
     "alacritty",
     "docker.io",
+    "python-is-python3",
+    "htop",
 ]
 
 LIGHTDM_SOFTWARE = [
