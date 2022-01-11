@@ -1,5 +1,6 @@
 import logging
-from base import _, apt_install
+from base import _, apt_install, apt_update, apt_upgrade
+from constants import BASIC_SOFTWARE, LIGHTDM_SOFTWARE
 import os
 import subprocess
 import re
@@ -10,6 +11,39 @@ I3_BRANCH_NEXT = "gaps-next"
 I3_BRANCH_DEFAULT = "gaps"
 I3_GITDIR="i3-gaps"
 I3_PATCHDIR="patches"
+
+def basics():
+    # Add 32bit architecture for later use of wine and steam
+    _("sudo dpkg --add-architecture i386")
+
+    # Update and Upgrade
+    apt_update()
+    apt_upgrade()
+
+    # Base install
+    apt_install(BASIC_SOFTWARE)
+
+    # Set askpass
+    _('echo "Path askpass /usr/bin/ssh-askpass" | sudo tee /etc/sudo.conf')
+
+    # Copy desktop files
+    _("cp ./desktop-files/*.desktop ~/.local/share/applications/")
+
+def restricted_extras():
+    apt_install(["ubuntu-restricted-extras"])
+
+def light_dm():
+    apt_install(LIGHTDM_SOFTWARE)
+
+def copy_configs():
+    _("mkdir ~/.config")
+    _("cp -r ./config/* ~/.config/")
+
+def build_startup_script(arandr_layout: bool, conky: bool, nitrogen: bool = True):
+    startups = []
+    startups.append("nitrogen --restore")
+    startups.append("bash ~/.screenlayout/default.sh")
+    
 
 def i3_gaps(install_next: bool = True):
     logging.info("Install dependencies")

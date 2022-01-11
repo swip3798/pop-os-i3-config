@@ -18,6 +18,8 @@ BASIC_SOFTWARE = [
     "docker.io",
     "python-is-python3",
     "htop",
+    "conky",
+    "conky-all"
 ]
 
 LIGHTDM_SOFTWARE = [

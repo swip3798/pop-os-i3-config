@@ -1,8 +1,4 @@
-import os
 import argparse
-
-from base import _, apt_install, apt_update, apt_upgrade
-from constants import BASIC_SOFTWARE, LIGHTDM_SOFTWARE
 import installs
 
 parser = argparse.ArgumentParser(description='Install i3 window manager and related software.')
@@ -21,39 +17,24 @@ logging.basicConfig(format='%(levelname)s [%(asctime)s]:%(message)s', level=logg
 args = parser.parse_args()
 #print(args)
 
-# Add 32bit architecture for later use of wine and steam
-_("sudo dpkg --add-architecture i386")
-
-# Update and Upgrade
-apt_update()
-apt_upgrade()
-
-# Base install
-apt_install(BASIC_SOFTWARE)
+installs.basics()
 
 if not args.no_restricted:
-    apt_install(["ubuntu-restricted-extras"])
+    installs.restricted_extras()
 else:
     logging.info("ubuntu-restricted-extras skipped")
 
 # Lightdm install
 if args.light_dm:
-    apt_install(LIGHTDM_SOFTWARE)
+    installs.light_dm()
 else:
     logging.info("No Lightdm installation")
-
-# Set askpass
-_('echo "Path askpass /usr/bin/ssh-askpass" | sudo tee /etc/sudo.conf')
-
-# Copy desktop files
-_("cp ./desktop-files/*.desktop ~/.local/share/applications/")
 
 # Build and install i3-gaps
 installs.i3_gaps()
 
 # Copy configs
-_("mkdir ~/.config")
-_("cp -r ./config/* ~/.config/")
+installs.copy_configs()
 
 if args.dev_tools:
     installs.dev_tools()

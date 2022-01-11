@@ -15,3 +15,9 @@ def apt_update() -> int:
 def apt_upgrade() -> int:
     return _("sudo apt upgrade -y")
 
+def choice(prompt: str) -> bool:
+    return input("{} [y/n]".format(prompt)).lower() == "y"
+
+def prompt(prompt: str):
+    logging.info("{} [ENTER]".format(prompt))
+    input("")
